@@ -1,0 +1,240 @@
+.container {
+    margin-top: 36px;
+    width: 390px;
+    height: 844px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.onboarding {
+    width: 360px;
+    max-width: 390px;
+    margin: 0 auto;
+    height: 844px;
+    border: 1px;
+}
+
+.homepage {
+    width: 390px;
+    height: 844px;
+    top: 36px;
+    margin-left: 450px;
+}
+
+.appointment-btn {
+    width: 30px;
+    height: 30px;
+    margin-top: 24px;
+    margin-left: 346px;
+    background-color: #ed5579;
+}
+
+.add-btn {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    margin-top: 24px;
+    font-family: "Noto Sans";
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 20px;
+    text-align: center;
+    border-radius: 10px;
+    border: 1px solid #ed5579;
+    background-color: #ed5579;
+    color: #ffffff;
+}
+
+.ttl {
+    position: absolute;
+    font-family: "Noto Sans";
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    margin-top: 31px;
+    line-height: 16px;
+    color: #ed5579;
+}
+
+.day-name {
+    height: 16px;
+    margin-top: 50px;
+    font-family: "Noto Sans";
+    font-style: normal;
+    font-weight: 500;
+    font-size: 13px;
+    line-height: 16px;
+    color: #8f9bb3;
+}
+
+.calendar {
+    margin-top: 20px;
+    margin-left: 20px;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.days {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 10px;
+}
+
+.day {
+    font-family: Noto Sans;
+    font-size: 15px;
+    font-weight: 500;
+    line-height: 20px;
+    letter-spacing: 0px;
+    text-align: center;
+    color: #222b45;
+}
+
+.day,
+.empty {
+    border-radius: 5px;
+    padding: 10px;
+    text-align: center;
+}
+
+.empty {
+    visibility: hidden;
+}
+
+.current-date {
+    background-color: #ed5579;
+    color: #fff;
+}
+
+.selected-date {
+    background-color: #38aefc;
+    color: #fff;
+}
+
+.note {
+    margin-bottom: 10px;
+}
+
+.month {
+    height: 16px;
+    font-family: Noto Sans;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 16px;
+    color: #222b45;
+
+    text-align: center; /* Center text */
+}
+
+.year {
+    position: absolute;
+    height: 16px;
+    font-family: "Noto Sans";
+    font-style: normal;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 16px;
+    color: #8f9bb3;
+    width: 26px;
+    height: 16px;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    left: 0;
+    right: 0; /* Center text */
+}
+
+.prev {
+    box-sizing: border-box;
+    position: absolute;
+    width: 34px;
+    height: 34px;
+    mix-blend-mode: normal;
+    border: 1px solid #ced3de;
+    border-radius: 10px;
+}
+
+.next {
+    border-radius: 10px;
+    box-sizing: border-box;
+    position: absolute;
+    width: 34px;
+    height: 34px;
+    mix-blend-mode: normal;
+    border: 1px solid #ced3de;
+}
+
+.add {
+    width: 30px;
+    height: 30px;
+    top: 24px;
+    left: 346px;
+}
+
+.data-layout {
+    width: 390px;
+    height: 95px;
+    margin-top: 10px;
+    box-shadow: 0px 3px 30px 0px #0000000f;
+}
+
+.event_time {
+    margin-left: 15px;
+    padding-top: 13px;
+    width: 293px;
+    height: 19px;
+    font-family: Noto Sans;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 19px;
+    letter-spacing: 1px;
+    text-align: left;
+    color: #ed5579;
+}
+
+.cat-name {
+    position: absolute;
+    width: 293px;
+    height: 19px;
+    margin-top: 13px;
+    margin-left: 15px;
+    font-family: Noto Sans;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 19px;
+    letter-spacing: 1px;
+    text-align: left;
+    color: #222b45;
+}
+
+.event-description {
+    width: 293px;
+    position: absolute;
+    height: 14px;
+    font-family: Noto Sans;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 14px;
+    letter-spacing: 0.75px;
+    text-align: left;
+    margin-left: 15px;
+    margin-top: 35px;
+    color: #8f9bb3;
+}
+
+.no-appo{
+    width: 340px;
+    height: 30px;
+    margin-top: 20px !important;
+    box-shadow: 0px 3px 30px 0px #0000000f;
+    color: #ed5579;
+    text-align: center;
+}

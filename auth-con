@@ -1,0 +1,119 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Models\User;
+use App\Services\Msg91Service;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Validator;
+
+class AuthController extends Controller
+{
+    protected $msg91Service;
+
+    public function __construct(Msg91Service $msg91Service)
+    {
+        $this->msg91Service = $msg91Service;
+    }
+
+    public function showRegistrationForm()
+    {
+        return view('register');
+    }
+
+    public function register(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|string|max:255',
+            'email' => 'nullable|email|max:255|unique:users',
+            'mobile_no' => 'required|string|max:15|unique:users',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect('/register')
+                        ->withErrors($validator)
+                        ->withInput();
+        }
+
+        $user = User::create([
+            'name' => $validator->validated()['name'],
+            'email' => $validator->validated()['email'],
+            'mobile_no' => $validator->validated()['mobile_no'],
+        ]);
+
+        Auth::login($user);
+
+        return redirect('/appointment')->with('success', 'Registration successful. You are now logged in.');
+    }
+    public function showLoginForm()
+    {
+        return view('login');
+    }
+
+    public function login(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'mobile_no' => 'required|string',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect('/login')
+                ->withErrors($validator)
+                ->withInput();
+        }
+
+        $mobileNumber = $validator->validated()['mobile_no'];
+        $defaultOtp = '123456';
+
+        $user = User::where('mobile_no', $mobileNumber)->first();
+
+        if ($user) {
+            Session::put('mobileNumber', $user->mobile_no);
+            Session::put('otp', $defaultOtp);
+
+            return redirect('/verify-otp')->with(['success' => 'Please verify your OTP.','login_mobile_no' => $mobileNumber]);
+        } else {
+            return redirect('/login')->with('error', 'User not found. Please register first.');
+        }
+    }
+
+    public function showOtpVerificationForm()
+    {
+        return view('verify-otp');
+    }
+
+    public function verifyOtp(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'otp' => 'required|string|size:6',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect('/login')
+                ->withErrors($validator)
+                ->withInput();
+        }
+
+        $enteredOtp = $validator->validated()['otp'];
+        $sentOtp = Session::get('otp');
+
+        if ($sentOtp === $enteredOtp) {
+            Session::forget('otp');
+
+            $user = User::where('mobile_no', Session::get('mobileNumber'))->first();
+            Auth::login($user);
+
+            return redirect('/calendar')->with('success', 'OTP verified successfully. You are now logged in.');
+        } else {
+            return redirect('/login')->with('error', 'Invalid OTP. Please try again.');
+        }
+    }
+
+    public function logout()
+    {
+        Auth::logout();
+        return redirect('/login')->with('success', 'Logged out successfully.');
+    }
+}
